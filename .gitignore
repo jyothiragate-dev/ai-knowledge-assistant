@@ -7,3 +7,7 @@ __pycache__/
 
 # Environment variables / secrets
 .env
+# Local test documents
+ai-service/data/documents/
+# Local Chroma vector database
+ai-service/chroma_db/
