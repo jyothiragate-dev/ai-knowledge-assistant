@@ -1,0 +1,183 @@
+<div class="app-shell">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon">K</div>
+
+      <div>
+        <h1>Knowledge Assistant</h1>
+        <p>Ask questions from your documents</p>
+      </div>
+    </div>
+
+    <button
+      class="clear-button"
+      type="button"
+      (click)="clearConversation()"
+    >
+      Clear
+    </button>
+  </header>
+
+  <main class="main-content">
+
+    <section class="hero">
+      <span class="eyebrow">AI-POWERED DOCUMENT SEARCH</span>
+
+      <h2>Find answers inside your documents.</h2>
+
+      <p>
+        Upload PDF documents and ask questions using natural language.
+        Answers are generated using relevant information retrieved from
+        your knowledge base.
+      </p>
+    </section>
+
+    <div class="workspace">
+
+      <section class="card question-card">
+        <div class="card-heading">
+          <div>
+            <span class="section-label">ASK</span>
+            <h3>What would you like to know?</h3>
+          </div>
+        </div>
+
+        <textarea
+          [(ngModel)]="query"
+          placeholder="Example: Where is NovaTech headquartered?"
+          rows="5"
+        ></textarea>
+
+        <div class="question-actions">
+          <span class="helper-text">
+            Answers are generated from your indexed documents.
+          </span>
+
+          <button
+            class="primary-button"
+            type="button"
+            [disabled]="!query.trim() || isLoading"
+            (click)="askQuestion()"
+          >
+            {{ isLoading ? 'Searching...' : 'Ask question' }}
+          </button>
+        </div>
+      </section>
+
+      <section class="card upload-card">
+        <span class="section-label">KNOWLEDGE BASE</span>
+
+        <h3>Add a document</h3>
+
+        <p class="upload-description">
+          Upload a PDF to make its content searchable by the assistant.
+        </p>
+
+        <label class="file-drop">
+          <input
+            type="file"
+            accept="application/pdf"
+            (change)="onFileSelected($event)"
+          />
+
+          <span class="file-icon">↑</span>
+
+          <strong>
+            {{ selectedFile ? selectedFile.name : 'Choose a PDF document' }}
+          </strong>
+
+          <span>
+            {{ selectedFile ? 'Ready to upload' : 'PDF files supported' }}
+          </span>
+        </label>
+
+        <button
+          class="secondary-button"
+          type="button"
+          [disabled]="!selectedFile || isUploading"
+          (click)="uploadDocument()"
+        >
+          {{ isUploading ? 'Uploading...' : 'Upload document' }}
+        </button>
+
+        @if (uploadMessage) {
+          <p class="upload-message">
+            {{ uploadMessage }}
+          </p>
+        }
+      </section>
+
+    </div>
+
+    @if (isLoading) {
+      <section class="card status-card">
+        <div class="loader"></div>
+
+        <div>
+          <strong>Searching your knowledge base</strong>
+          <p>Retrieving relevant context and generating an answer...</p>
+        </div>
+      </section>
+    }
+
+    @if (errorMessage) {
+      <section class="error-card">
+        {{ errorMessage }}
+      </section>
+    }
+
+    @if (answer) {
+      <section class="card answer-card">
+        <div class="answer-heading">
+          <div>
+            <span class="section-label">ANSWER</span>
+            <h3>Knowledge Assistant</h3>
+          </div>
+
+          <span class="grounded-badge">
+            Grounded response
+          </span>
+        </div>
+
+        <div class="answer-content">
+          {{ answer }}
+        </div>
+
+        @if (sources.length > 0) {
+          <div class="sources">
+            <h4>Sources</h4>
+
+            <div class="source-list">
+              @for (source of sources; track $index) {
+                <div class="source-item">
+                  <span class="source-number">
+                    {{ $index + 1 }}
+                  </span>
+
+                  <div>
+                    <strong>
+                      {{ source.source }}
+                    </strong>
+
+                    @if (source.page) {
+                      <span>
+                        Page {{ source.page }}
+                      </span>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </section>
+    }
+
+  </main>
+
+  <footer>
+    AI Knowledge Assistant · Angular · Spring Boot · FastAPI · RAG
+  </footer>
+
+</div>

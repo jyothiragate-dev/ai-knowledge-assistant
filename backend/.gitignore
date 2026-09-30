@@ -1,0 +1,34 @@
+# Python virtual environment
+ai-service/venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment variables / secrets
+.env
+*.env
+
+# Local test documents
+ai-service/data/documents/
+
+# Local Chroma vector database
+ai-service/chroma_db/
+
+# Spring Boot / Maven
+backend/target/
+*.class
+
+# Angular / Node
+frontend/node_modules/
+frontend/.angular/
+frontend/dist/
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
