@@ -4,6 +4,11 @@ A full-stack document Q&A application built with Angular, Spring Boot, FastAPI, 
 
 Users can upload PDF documents and ask questions about their content. The application retrieves relevant sections from the indexed documents and uses them as context to generate grounded answers with source information.
 
+## Application
+
+![AI Knowledge Assistant](docs/images/knowledge-assistant-ui.png)
+
+
 ## Architecture
 
 ```text

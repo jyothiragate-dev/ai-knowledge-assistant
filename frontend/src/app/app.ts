@@ -66,7 +66,7 @@ export class App {
 
     this.http
       .post<QueryResponse>(
-        'http://localhost:8080/api/query',
+       'http://localhost:8000/query',
         {
           query: question
         }
